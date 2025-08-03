@@ -14,6 +14,9 @@ gclone() {
     repo_url=$1
     remote=$(echo $repo_url | cut -d':' -f1)
     repo=$(echo $repo_url | cut -d':' -f2-)
+
+    # remove the .git suffix if it exists
+    repo=$(echo $repo | sed 's/\.git$//')
     
     # Create the necessary directories if they do not exist
     mkdir -p $HOME/go/src/$remote
