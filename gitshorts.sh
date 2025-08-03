@@ -13,8 +13,10 @@ gclone() {
     
     repo_url=$1
     remote=$(echo $repo_url | cut -d':' -f1)
-    repo=$(echo $repo_url | cut -d':' -f2-)
+    # remove git@ or git+ssh:// from the remote
+    remote=$(echo $remote | sed 's/git@//; s/git+ssh:\/\///')
 
+    repo=$(echo $repo_url | cut -d':' -f2-)
     # remove the .git suffix if it exists
     repo=$(echo $repo | sed 's/\.git$//')
     
